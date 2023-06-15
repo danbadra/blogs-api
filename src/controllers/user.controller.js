@@ -1,7 +1,4 @@
-const jwt = require('jsonwebtoken');
 const UserService = require('../services/user.service');
-
-const SECRET = process.env;
 
 const getAll = async (_req, res) => {
   try {
@@ -12,8 +9,6 @@ const getAll = async (_req, res) => {
     res.status(500).json({ message: 'Ocorreu um erro' });
   }
 };
-
-const token = jwt.sign(payload, SECRET);
 
 module.exports = {
   getAll,

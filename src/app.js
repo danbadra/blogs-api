@@ -1,11 +1,11 @@
 const express = require('express');
+const loginRouter = require('./routes/loginRouter');
 
 // ...
 
 const app = express();
 
 // ! <-------------- NÃO MEXER -------------->
-// não remova ou mova esse endpoint
 app.get('/', (_request, response) => {
   response.send();
 });
@@ -13,8 +13,8 @@ app.get('/', (_request, response) => {
 app.use(express.json());
 // ! <-------------- NÃO MEXER -------------->
 
-// ...
+// * <---------------------- MEU CÓDIGO ----------------------> 
 
-// É importante exportar a constante `app`,
-// para que possa ser utilizada pelo arquivo `src/server.js`
+app.use('/', loginRouter);
+
 module.exports = app;
