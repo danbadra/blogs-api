@@ -1,16 +1,6 @@
 const { User } = require('../models');
 const { createToken } = require('../utils/JWT');
 
-const getAll = async () => {
-  const users = await User.findAll();
-  
-  if (!users) return { type: 'NO_USER_FOUND', message: 'Ocorreu um erro' };
-
-  // delete users.dataValues.password;
-
-  return { type: null, message: users };
-};
-
 const createUser = async (displayName, email, password, image) => {
   const emailAlreadyRegistered = await User.findOne({ where: { email } });
 
@@ -29,7 +19,24 @@ const createUser = async (displayName, email, password, image) => {
   return { type: null, message: token };
 };
 
+const getAll = async () => {
+  const users = await User.findAll();
+  
+  if (!users) return { type: 'NO_USER_FOUND', message: 'Ocorreu um erro' };
+
+  return { type: null, message: users };
+};
+
+const getUserById = async (id) => {
+  const user = await User.findOne({ where: { id } });
+
+  if (!user) return { type: 'USER_NOT_FOUND', message: 'User does not exist' };
+
+  return { type: null, message: user };
+};
+
 module.exports = {
-  getAll,
   createUser,
+  getAll,
+  getUserById,
 };
