@@ -3,8 +3,10 @@ const { createToken } = require('../utils/JWT');
 
 const getAll = async () => {
   const users = await User.findAll();
-
+  
   if (!users) return { type: 'NO_USER_FOUND', message: 'Ocorreu um erro' };
+
+  // delete users.dataValues.password;
 
   return { type: null, message: users };
 };

@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
       return res.status(500).json({ message: users.message });
     }
 
-    return res.status(200).json({ message: users.message });
+    return res.status(200).json(users.message);
 };
 
 const createUser = async (req, res) => {
