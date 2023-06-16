@@ -1,13 +1,13 @@
 const UserService = require('../services/user.service');
 
 const getAll = async (req, res) => {
-  try {
     const users = await UserService.getAll();
-    return res.status(200).json(users);
-  } catch (e) {
-    console.log(e.message);
-    res.status(500).json({ message: 'Ocorreu um erro' });
-  }
+
+    if (users.type === 'NO_USER_FOUND') {
+      return res.status(500).json({ message: users.message });
+    }
+
+    return res.status(200).json({ message: users.message });
 };
 
 const createUser = async (req, res) => {

@@ -4,7 +4,9 @@ const { createToken } = require('../utils/JWT');
 const getAll = async () => {
   const users = await User.findAll();
 
-  return users;
+  if (!users) return { type: 'NO_USER_FOUND', message: 'Ocorreu um erro' };
+
+  return { type: null, message: users };
 };
 
 const createUser = async (displayName, email, password, image) => {
