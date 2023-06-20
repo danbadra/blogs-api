@@ -1,5 +1,5 @@
 const UserModel = (sequelize, DataTypes) => {
-  const User = sequelize.define('users', {
+  const User = sequelize.define('User', {
     id: {
       allowNull: false,
       autoIncrement: true,

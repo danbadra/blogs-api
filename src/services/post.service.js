@@ -1,6 +1,6 @@
 const { BlogPost } = require('../models');
 const { PostCategory } = require('../models');
-const { users } = require('../models');
+const { User } = require('../models');
 const { Category } = require('../models');
 
 const createPostCategory = async (categoryId, postId) => {
@@ -28,7 +28,7 @@ const getAll = async () => {
       {
         include: [
           { 
-            model: users, 
+            model: User, 
             as: 'user',
           },
           {
