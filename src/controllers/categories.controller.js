@@ -14,7 +14,20 @@ const getAll = async (req, res) => {
   return res.status(200).json(categories.message);
 };
 
+const getCategoryById = async (req, res) => {
+  const { id } = req.params;
+
+  const category = await CategoriesService.getCategoryById(id);
+
+  if (category.type === 'USER_NOT_FOUND') {
+    return res.status(404).json({ message: category.message });
+  }
+
+  return res.status(200).json(category.message);
+};
+
 module.exports = {
   createCategory,
   getAll,
+  getCategoryById,
 };

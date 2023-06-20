@@ -12,7 +12,16 @@ const getAll = async () => {
   return { type: null, message: categories };
 };
 
+const getCategoryById = async (id) => {
+  const category = await Category.findOne({ where: { id } });
+
+  if (!category) return { type: 'USER_NOT_FOUND', message: 'User does not exist' };
+
+  return { type: null, message: category };
+};
+
 module.exports = {
   createCategory,
   getAll,
+  getCategoryById,
 };

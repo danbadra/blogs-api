@@ -9,7 +9,8 @@ module.exports = async (req, res, next) => {
   if (!token) return res.status(401).json({ message: 'Token not found' });
   try {
     // O 'verify' é uma função nativa do jwt, que decodifica o token.
-    jwt.verify(token, secret);
+    const tokenVerification = jwt.verify(token, secret);
+    res.locals.user = tokenVerification;
     next();
   } catch (e) {
       return res.status(401).json({ message: 'Expired or invalid token' });
