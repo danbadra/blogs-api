@@ -4,23 +4,24 @@ const { User } = require('../models');
 const { Category } = require('../models');
 
 const createPostCategory = async (categoryId, postId) => {
-  console.log(categoryId, postId);
   const newPostCategory = await PostCategory.create({ categoryId, postId });
   
   return { type: null, message: newPostCategory };
 };
 
 const createPost = async (title, content, categoryIds, userId) => {
-  const newPost = await BlogPost.create({ title,
+  const { datavalues } = await BlogPost.create({ title,
     content,
     userId,
     published: new Date(),
     updated: new Date(), 
   });
 
-  categoryIds.map((id) => createPostCategory(id, newPost.id));
+  const map = categoryIds.map((id) => createPostCategory(id, datavalues.id));
 
-  return { type: null, message: newPost };
+  await Promise.all(map);
+
+  return { type: null, message: datavalues };
 };
 
 const getAll = async () => {

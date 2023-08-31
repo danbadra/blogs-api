@@ -7,7 +7,6 @@ const validateLogin = async (password, email) => {
   } 
 
   const user = await User.findOne({ where: { email, password } });
-  console.log(user);
 
   if (!user) {
     return { type: 'INVALID_FIELD', message: 'Invalid fields' }; 
